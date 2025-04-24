@@ -22,20 +22,18 @@ def setup(set_prefix=True):
 
 
 setup()
-from websockets.asyncio.server import serve
-from websockets.frames import CloseCode
+from websockets.sync.server import serve
 
 
-async def handler(websocket):
-    sesame = await websocket.recv()
+def handler(websocket):
+    sesame = websocket.recv()
+    websocket.send(f"Hello!")
 
-    await websocket.send(f"Hello!")
 
-
-async def main():
-    async with serve(handler, "0.0.0.0", 8888) as server:
-        await server.serve_forever()
+def main():
+    with serve(handler, "0.0.0.0", 8888) as server:
+        server.serve_forever()
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
