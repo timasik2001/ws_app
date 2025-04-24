@@ -1,5 +1,3 @@
-import asyncio
-
 import django
 
 def setup(set_prefix=True):
@@ -22,6 +20,7 @@ def setup(set_prefix=True):
 
 
 setup()
+
 from websockets.sync.server import serve
 
 
